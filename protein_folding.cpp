@@ -65,5 +65,6 @@ int main() {
 	string chain;
 	cin >> chain;
 	chain = " "+chain;
-	cout << "answer:" << dynprog(chain) << endl;
+	int answer =  dynprog(chain);
+	cout << "answer: " << answer << endl;
 }
