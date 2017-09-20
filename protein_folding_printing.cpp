@@ -39,7 +39,7 @@ void print_matrix(const string& chain, const vector<vector<int>>& q, int n) {
 	}
 }
 
-int find_max_index(vector<vector<int>>& q, int row, int size) {
+int find_max_index(vector<vector<int>>& q, int row, int size, int start) {
 	int best = -1;
 	int best_index = 0;
 	for(int i=1; i<=size; ++i) {
@@ -63,14 +63,16 @@ int dynprog(const string& chain) {
 				int candidate = profit(chain,a,b,c)+q[b+1][c];
 				if( candidate > t ) {
 					t = candidate;
+					fold_point = c;
 				}
-				fold_point = c;
 			}
 			q[a][b]=t;
 			f[a][b]=fold_point;
 		}
 	}
 	print_matrix(chain, q, n);
+	printf("\n");
+	print_matrix(chain, f, n);
 	int max_score=0;
 	for(int b = 2; b<=n; ++b) {
 		if(q[1][b]>=max_score) {
@@ -86,7 +88,7 @@ int dynprog(const string& chain) {
 	int max_x = x;
 	int min_x = x;
 	int y = 0;
-	int next_fold = find_max_index(q, 1, n);
+	int next_fold = find_max_index(q, 1, n, 1);
 	int old_fold = 1;
 	vector<vector<char>> m(height, vector<char>(width, ' '));
 	for(y=1; true; ++y) {
