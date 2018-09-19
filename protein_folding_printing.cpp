@@ -66,8 +66,10 @@ int dynprog(const string& chain) {
 					fold_point = c;
 				}
 			}
-			q[a][b]=t;
-			f[a][b]=fold_point;
+			if(t != 0) {
+				q[a][b]=t;
+				f[a][b]=fold_point;
+			}
 		}
 	}
 	print_matrix(chain, q, n);
