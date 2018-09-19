@@ -43,14 +43,14 @@ int dynprog(const string& chain) {
 	int n = chain.size();
 	vector<vector<int>> q(n+2,vector<int>(n+2,0));
 
-	for(int b=n-1; b >= 2; --b) {
+	for(int fold = n-2; fold >= 2; --fold) {
 
-		for(int a=1; a<b; ++a) {
-			int t=-1;
-			for(int c=b+2;c<= n; ++c) {
-				t=max(t,profit(chain,a,b,c)+q[b+1][c]);
+		for(int start = 1; start < fold; ++start) {
+			int optimal = -1;
+			for(int end = fold + 2; end <= n; ++end) {
+				t = max(optimal, profit(chain, start, fold, end) + q[fold + 1][end]);
 			}
-			q[a][b]=t;
+			q[start][end] = optimal;
 		}
 	}
 	print_matrix(chain, q, n);
