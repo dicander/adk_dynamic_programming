@@ -48,7 +48,7 @@ int dynprog(const string& chain) {
 		for(int start = 1; start < fold; ++start) {
 			int optimal = -1;
 			for(int end = fold + 2; end <= n; ++end) {
-				t = max(optimal, profit(chain, start, fold, end) + q[fold + 1][end]);
+				optimal = max(optimal, profit(chain, start, fold, end) + q[fold + 1][end]);
 			}
 			q[start][end] = optimal;
 		}
