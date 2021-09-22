@@ -119,10 +119,11 @@ int dynprog(const string& chain) {
 	int min_x = x;
 	int y = 0;
 	int next_fold = find_max_index(q, 1, n, 1);
-	int old_fold = 1;
+	int old_fold = 0;
 	int target = max_score;
 	vector<vector<char>> m(height, vector<char>(width, ' '));
 	for(y=1; true; ++y) {
+	    bool first_after_fold = true;
 		if(y%2) {
 			dx = 1;
 		} else {
@@ -131,21 +132,21 @@ int dynprog(const string& chain) {
 		while(true) {
 			if(string_index>=n) break;
 			dout << y << " <y x> " << x << " string_index " << string_index << endl;
+			dout << "target = " << target << endl;
 			if(dbg && string_index <=n) {
 				dout << "current letter" << chain[string_index]<< endl;
 			}
 			m[y][x] = chain[string_index];
+			if(m[y-1][x] == '1' && chain[string_index] == '1' && !first_after_fold) {
+                --target;
+            }
 			//dout << "waiting for next fold " << next_fold << " now" << endl;
-			if(string_index == next_fold) {
-				int temp = next_fold;
-				next_fold = find_best_fold(q, chain, next_fold+1, n, next_fold+2, target, dx, y, m);
-				old_fold = temp;
-				target = q[old_fold+1][next_fold];
-				//dout << "string_index + 1 = " << string_index + 1 << endl;
-				//dout << "new next fold " << next_fold << endl;
+			if(q[old_fold+1][string_index] == target && !first_after_fold && target>0) {
+				old_fold = string_index;
 				string_index++;
 				break;
 			}
+            first_after_fold = false;
 			string_index++;
 			if(string_index>=n) break;
 			x += dx;
