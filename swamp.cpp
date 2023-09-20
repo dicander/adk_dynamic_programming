@@ -17,6 +17,20 @@ void print_matrix(const matrix& m) {
 }
 
 
+void print_sophisticated(matrix& M, matrix& D) {
+    // Prints the values in the first matrix using two digits and the second value using two digits
+    // with the format [ 1:12] [ 2:23]
+
+    for(int i=0; i<8; ++i) {
+        for(int j=0; j<8; ++j) {
+            cout << "[" << setw(2) << M[i][j] << ":" << setw(2) << D[i][j] << "] ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+
+}
+
 void transpose(matrix& M) {
     int temp;
     for(int i=0; i<8; ++i) {
@@ -59,4 +73,5 @@ int main() {
         }
     }
     print_matrix(D);
+    print_sophisticated(M, D);
 }
