@@ -19,8 +19,8 @@ int main() {
         for(int j=0; j<=GOAL; ++j) {
             cout << d[j] << " ";
         }
-        cout << endl;
+        cout << endl;        
     }
-
+    cout << "Total combinations: " << endl;
     cout << d[GOAL] << endl;
 }
