@@ -119,13 +119,13 @@ bool check_string(const vector<pair<string, string>>& non_terminal_grammar,
     // with indices (0, n-1).
     
     for(int i=1; i<n; ++i) {
-        if(DBG) {
+        if(false && DBG) {
             cout << "Outer loop: i is " << i << endl;
             cout << "n is " << n << endl;
         }
         // The inner loop iterates over the entries in the diagonal.
         for(int j=0; j<n-i; ++j) {
-            if(DBG) {
+            if(false && DBG) {
                 cout << "Inner loop: j is " << j << endl;
                 cout << "Targeting this square" << endl;
                 cout << "j is " << j << endl;
